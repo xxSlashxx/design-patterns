@@ -5,28 +5,37 @@ public class Product
     private String name;
     private int price;
 
-    public String getName()
+    Product(ProductBuilder builder)
     {
-        return name;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    public int getPrice()
-    {
-        return price;
-    }
-
-    public void setPrice(int price)
-    {
-        this.price = price;
+        name = builder.name;
+        price = builder.price;
     }
 
     public String toString()
     {
-        return "Name: " + getName() + " Price: " + getPrice();
+        return "Name: " + name + " Price: " + price;
+    }
+
+    public static class ProductBuilder
+    {
+        private String name;
+        private int price;
+
+        public ProductBuilder setName(String name)
+        {
+            this.name = name;
+            return this;
+        }
+
+        public ProductBuilder setPrice(int price)
+        {
+            this.price = price;
+            return this;
+        }
+
+        public Product build()
+        {
+            return new Product(this);
+        }
     }
 }
